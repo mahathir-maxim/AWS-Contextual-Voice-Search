@@ -33,7 +33,7 @@ for row in table.findAll('tr')[1:]:
 # # Initialize a downloader instance. If no argument is passed
 # # to the constructor, the package will download filings to
 # # the current working directory.
-obj = Downloader("/home/runner/AWSCapstone")
+obj = Downloader("/home/ubuntu/AWS-Contextual-Voice-Search")
 
 # Get all 10-K and 8-K filings for Apple (ticker: AAPL)
 for ticker in it["Information Technology"]:
