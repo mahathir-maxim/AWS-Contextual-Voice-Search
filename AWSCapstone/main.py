@@ -3,8 +3,6 @@
 #     data = json.loads(url.read().decode())
 #     print(data)
 
-# Change by rakeen
-
 import sys
 sys.path.append(".")
 
