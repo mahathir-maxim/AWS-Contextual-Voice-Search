@@ -1,1 +1,6 @@
 /sec-edgar-filings/
+/json_files/
+/AWSCapstone/__pycache__/**
+.DS_store
+
+AWSCapstone/__pycache__/Downloader.cpython-36.pyc
