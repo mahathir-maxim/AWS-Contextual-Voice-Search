@@ -40,7 +40,7 @@ for ticker in ticker_to_cik.keys():
     y = json.loads(x)
 
     # the result is a Python dictionary:
-    outfile = "parsed_json_files/" + str(y["cik"]) + "_json"
+    outfile = "parsed_json_files/" + str(y["cik"]) + "_cik" + ".json"
 
     with open(outfile, 'w') as json_file:
         json.dump(y, json_file)
