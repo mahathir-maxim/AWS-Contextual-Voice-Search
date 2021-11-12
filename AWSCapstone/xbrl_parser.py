@@ -2,67 +2,75 @@ import glob
 import bs4 as bs
 import re
 import pandas as pd
+import json
+import csv
+from pprint import pprint
+
 # print(glob.glob("sec-edgar-filings/*/10-K/*/*.html"))
-file_list = [f for f in glob.glob("sec-edgar-filings/*/10-K/*/*.txt")]
+file_list = [f for f in glob.glob("parsed_json_files/*.json")]
 
-
-for file in file_list[:1]:
-    with open(file, 'r') as file:
-        raw_10k = file.read()
-    
-    #  print(raw_10k[0:1300])
-
-    # Regex to find <DOCUMENT> tags
-    doc_start_pattern = re.compile(r'<DOCUMENT>')
-    doc_end_pattern = re.compile(r'</DOCUMENT>')
-
-    # Regex to find <TYPE> tag prceeding any characters, terminating at new line
-    type_pattern = re.compile(r'<TYPE>[^\n]+')
-
-    doc_start_is = [x.end() for x in doc_start_pattern.finditer(raw_10k)]
-    doc_end_is = [x.start() for x in doc_end_pattern.finditer(raw_10k)]
-
-    doc_types = [x[len('<TYPE>'):] for x in type_pattern.findall(raw_10k)]
-
-    document = {}
-
-    # Create a loop to go through each section type and save only the 10-K section in the dictionary
-    for doc_type, doc_start, doc_end in zip(doc_types, doc_start_is, doc_end_is):
-        if doc_type == '10-K':
-            document[doc_type] = raw_10k[doc_start:doc_end]
-    
-    # display excerpt the document
-    print(document['10-K'][0:500])
-
-    # Write the regex
-    regex = re.compile(r'(>Item(\s|&#160;|&nbsp;)(1A|1B|7A|7|8)\.{0,1})|(ITEM\s(1A|1B|7A|7|8))')
-
-    # Use finditer to math the regex
-    matches = regex.finditer(document['10-K'])
-
-    # Write a for loop to print the matches
-    for match in matches:
-        print(match) 
+data_file = open('json_output.csv', 'w', newline='')
+csv_writer = csv.writer(data_file)
  
-    # Matches
-    matches = regex.finditer(document['10-K'])
+print(len(file_list))
 
-    # Create the dataframe
-    test_df = pd.DataFrame([(x.group(), x.start(), x.end()) for x in matches])
+# print(file_list)
+count = 0
+for file in file_list:
 
-    test_df.columns = ['item', 'start', 'end']
-    test_df['item'] = test_df.item.str.lower()
+    master_dict = []
+    
+    with open(file, 'r') as file:
+        j_file = file.read()
+        y = json.loads(j_file)
+        
+        
+        for attrb in ["Revenues", "NetIncomeLoss", "OperatingIncomeLoss", "ProfitLoss", "ReceivablesNetCurrent", "Assets", "AssetsCurrent", "DebtCurrent", "CommonStockValue"]:
+            dict = {}
 
-    test_df.replace('&#160;',' ',regex=True,inplace=True)
-    test_df.replace('&nbsp;',' ',regex=True,inplace=True)
-    test_df.replace(' ','',regex=True,inplace=True)
-    test_df.replace('\.','',regex=True,inplace=True)
-    test_df.replace('>','',regex=True,inplace=True)
+            if attrb in y["facts"]["us-gaap"]:
+                z = y["facts"]["us-gaap"][attrb]
+                dict["val_info"] = []
+                for val in z["units"]["USD"]:
+                    nested_dict = {}
+                    
+                    dict = {}
 
-    # Display the dataframe
-    print(test_df.head())
+                    dict["cik"] = y["cik"]
+                    dict["entityName"] = y["entityName"]
+                    dict["attribute_name"] = attrb
+                    if val["fp"] == "FY":
+                        dict["accn"] = val["accn"]
+                        dict["value"] = val["val"]
+                        dict["filing_date"] = val["filed"]
 
+                        master_dict.append(dict)
+                    
+                    # if nested_dict != {}:
+                    #     dict["val_info"].append(nested_dict)
+            
+    print(master_dict[0].keys())
+    print(master_dict[0].values())
 
+    
+    for data in master_dict:
+        
+        if count == 0:
+            header = data.keys()
+            csv_writer.writerow(header)
+            count += 1
+        
+        csv_writer.writerow(data.values())
+    
+    count += 1
 
+print(count)
+data_file.close()
+        
+        # print(y["facts"]["us-gaap"]["CommonStockValue"]["description"])
+        # for z in y["facts"]["us-gaap"].keys(): 
+        #  ["Revenues", "NetIncomeLoss", "OperatingIncomeLoss", "ProfitLoss", "ReceivablesNetCurrent", "Assets", "AssetsCurrent", "DebtCurrent", "CommonStockValue"]    
+        #   accn, cik,form, name_attrb, filing_date, value 
 
-
+    
+    
