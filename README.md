@@ -11,5 +11,7 @@ Raj
 Shivam
 
 To run front-end:
+
 cd to /AWS-Contextual-Voice-Search/front-end/aws-cvs
+
 Run command: npm run start
