@@ -14,4 +14,6 @@ To run front-end:
 
 cd to /AWS-Contextual-Voice-Search/front-end/aws-csv
 
+To build: npm install
+
 Run command: npm run start
