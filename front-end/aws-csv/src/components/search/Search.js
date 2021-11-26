@@ -6,7 +6,7 @@ const SearchBar = () => (
         <input
             type="text"
             id="header-search"
-            placeholder="Search EDGAR"
+            placeholder="Search by CIK number"
             name="s" 
         />
         <button type="submit">Search</button>

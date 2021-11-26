@@ -1,9 +1,10 @@
 import './App.css';
 import React, { useEffect, useState } from "react";
-import { Container } from "semantic-ui-react";
 import Search from './components/search/Search.js';
 import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
+import Dropdown from './components/dropdown/Dropdown';
+import { dropdownData } from './utils/dropdown_data';
 
 function App() {
 
@@ -26,11 +27,17 @@ function App() {
       <header className="App-header">
         <p> Welcome to Amazon Contextual Voice Search app! </p>
         <Search />
-        <CompanyData cikData={companyData} />
+        <span>&nbsp;</span>
         <img className="logo" src={logo} alt="Logo" />
       </header>
       <div className="App-content">
-        <p> Hello World!</p>
+        <span>&nbsp;</span>
+        <CompanyData cikData={companyData} />
+        <div className="accordion">
+          {dropdownData.map(({ title, content }) => (
+            <Dropdown title={title} content={content} />
+          ))}
+        </div>
       </div>
     </div>
   );
