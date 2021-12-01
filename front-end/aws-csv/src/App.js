@@ -5,6 +5,7 @@ import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
 import Dropdown from './components/dropdown/Dropdown';
 import { dropdownData } from './utils/dropdown_data';
+import { PostRequest } from './components/ml_endpoint/PostRequest';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Dropdown title={title} content={content} />
           ))}
         </div>
+        <PostRequest />
       </div>
     </div>
   );
