@@ -10,6 +10,8 @@ Bao
 Raj
 Shivam
 
+-----------------------------------------------------------------------
+
 To run front-end:
 
 cd to /AWS-Contextual-Voice-Search/front-end/aws-csv
@@ -18,6 +20,8 @@ To build: npm install
 
 Run command: npm run start
 
+-----------------------------------------------------------------------
+
 To run back-end:
 
 cd to API folder
@@ -25,6 +29,8 @@ cd to API folder
 run . venv/bin/activate
 
 run python3 app.py
+
+-----------------------------------------------------------------------
 
 To run heroku server for ML endpoint connection:
 
