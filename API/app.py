@@ -22,27 +22,27 @@ app = Flask(__name__)
 
 #     return jsonify(ret)
 
-# @app.route("/test1/<cik>/target?")
-# def data2(cik):
+@app.route("/test1/<cik>/target?")
+def data2(cik):
 
-#     args = request.args
+    args = request.args
 
-#     ret = []
+    ret = []
 
-#     file_name = "../parsed_json_files/" + cik + "_cik.json"
+    file_name = "../parsed_json_files/" + cik + "_cik.json"
 
-#     with open(file_name, "r") as js:
-#         data = json.load(js)
+    with open(file_name, "r") as js:
+        data = json.load(js)
     
-#     if len(args) == 0:
-#         return jsonify(data)
-#     elif len(args) >= 1:    
-#         for key in args.keys():
-#             attrb = args[key]
-#             ret.append(data["facts"]["us-gaap"][attrb])
+    if len(args) == 0:
+        return jsonify(data)
+    elif len(args) >= 1:    
+        for key in args.keys():
+            attrb = args[key]
+            ret.append(data["facts"]["us-gaap"][attrb])
 
 
-#     return jsonify(ret)
+    return jsonify(ret)
 
 # 
 # attrb = <attribute> ; year = <year>
