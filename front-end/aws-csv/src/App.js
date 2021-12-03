@@ -5,6 +5,7 @@ import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
 import Dropdown from './components/dropdown/Dropdown';
 import { dropdownData } from './utils/dropdown_data';
+import OutputTable from './components/Table/table.js';
 
 function App() {
 
@@ -37,6 +38,9 @@ function App() {
           {dropdownData.map(({ title, content }) => (
             <Dropdown title={title} content={content} />
           ))}
+        </div>
+        <div>
+          <OutputTable />
         </div>
       </div>
     </div>
