@@ -5,6 +5,7 @@ import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
 import Dropdown from './components/dropdown/Dropdown';
 import { dropdownData } from './utils/dropdown_data';
+import OutputTable from './components/Table/table.js';
 import { PostRequest } from './components/ml_endpoint/PostRequest';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [companyData, setCompanyData] = useState([])
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
+  const [visible, setVisible] = React.useState(false);
 
   // Fetch from python server
   useEffect(() => {
@@ -42,6 +44,13 @@ function App() {
           ))}
         </div>
         <PostRequest />
+
+        <div>
+        <button onClick={() => setVisible(!visible)}>
+        {visible ? 'Submit' : 'Submit'}
+        </button>
+        {visible && <OutputTable /> }
+        </div>
       </div>
     </div>
   );
