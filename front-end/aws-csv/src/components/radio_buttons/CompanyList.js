@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import '../dropdown/styles.css';
 import companies from '../../utils/companyName_to_cik.json'
 import attrb from '../../utils/list.json'
-import { PostRequest } from '../ml_endpoint/PostRequest';
 
 class CompanyList extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       companyNames: null,
-      attributes: null
+      attributes: null,
+      selection: "Value"
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -27,9 +27,19 @@ class CompanyList extends Component {
   formSubmit(event) {
     event.preventDefault();
     this.componentDidMount(this.state.selectedOption)
+    this.TextFile();
   }
 
-  componentWillMount(){
+  TextFile = () => {
+    var fs = require('fs');
+    fs.writeFile('/test.txt', 'Cool, I can do this in the browser!', function(err) {
+      fs.readFile('/test.txt', function(err, contents) {
+        console.log(contents.toString());
+      });
+    });
+  }
+
+  componentWillMount(event){
     this.state.companyNames = Object.keys(companies); 
     this.state.attributes = Object.values(attrb);
   }
@@ -37,6 +47,7 @@ class CompanyList extends Component {
   componentDidMount(event){
     console.log(event);
   }
+  
 
   render() {
     
@@ -66,7 +77,7 @@ class CompanyList extends Component {
             Submit
           </button>
         </form>
-
+        
       </div>
     );
   }

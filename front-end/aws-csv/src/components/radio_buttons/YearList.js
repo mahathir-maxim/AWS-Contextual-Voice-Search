@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import '../dropdown/styles.css';
 import years from '../../utils/years.json'
 
@@ -8,7 +8,8 @@ class YearList extends Component {
     super(props);
 
     this.state = {
-      yearList: null,
+        yearList: null,
+        selection: null
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -23,7 +24,6 @@ class YearList extends Component {
 
   formSubmit(event) {
     event.preventDefault();
-    console.log(this.state.selectedOption)
     this.componentDidMount(this.state.selectedOption)
   }
 
@@ -32,7 +32,9 @@ class YearList extends Component {
   }
 
   componentDidMount(event){
-
+    this.state.selection = event
+    console.log(this.state.selection);
+      
   }
 
   render() {

@@ -12,16 +12,19 @@ class PostRequest extends React.Component {
             predictedValue: null,
             userSelection: null,
             companyList: {
-                Alphabet: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://srelobtwa0.execute-api.us-east-1.amazonaws.com/test2Alphabet/alphabetrevresource', '{"data":"20210206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://1ftar1tina.execute-api.us-east-1.amazonaws.com/testAlphabetNet/alphabetnetapiresource', '{"data":"20221021"}'],
-                Apple: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://qsrbxkm9sb.execute-api.us-east-1.amazonaws.com/testApple/applerevresource', '{"data":"20120206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://qeoy3025h0.execute-api.us-east-1.amazonaws.com/TestAppleNet/applenetapiresource', '{"data":"20221021"}'],
-                Amazon: ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://542ebht62f.execute-api.us-east-1.amazonaws.com/TestAmazonNet/amazonnetapiresource', '{"data":"20221021"}'],
-                ATnT: ['Revenue', 'https://obscure-thicket-61096.herokuapp.com/https://2du8kgrp7h.execute-api.us-east-1.amazonaws.com/TestAtnTRev/atntrevresource', '{"data":"20221021"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ml7sy252q8.execute-api.us-east-1.amazonaws.com/testATnTNet/atntnetapiresource', '{"data":"20221021"}'],
-                AMD: ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ke5s0fv5v9.execute-api.us-east-1.amazonaws.com/testAMDNet/amdnetresource', '{"data":"20221021"}']
+                "Alphabet": ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://srelobtwa0.execute-api.us-east-1.amazonaws.com/test2Alphabet/alphabetrevresource', '{"data":"20210206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://1ftar1tina.execute-api.us-east-1.amazonaws.com/testAlphabetNet/alphabetnetapiresource', '{"data":"20221021"}'],
+                "Apple": ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://qsrbxkm9sb.execute-api.us-east-1.amazonaws.com/testApple/applerevresource', '{"data":"20120206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://qeoy3025h0.execute-api.us-east-1.amazonaws.com/TestAppleNet/applenetapiresource', '{"data":"20221021"}'],
+                "Amazon": ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://542ebht62f.execute-api.us-east-1.amazonaws.com/TestAmazonNet/amazonnetapiresource', '{"data":"20221021"}'],
+                "ATnT": ['Revenue', 'https://obscure-thicket-61096.herokuapp.com/https://2du8kgrp7h.execute-api.us-east-1.amazonaws.com/TestAtnTRev/atntrevresource', '{"data":"20221021"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ml7sy252q8.execute-api.us-east-1.amazonaws.com/testATnTNet/atntnetapiresource', '{"data":"20221021"}'],
+                "AMD": ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ke5s0fv5v9.execute-api.us-east-1.amazonaws.com/testAMDNet/amdnetresource', '{"data":"20221021"}']
             },
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
+
     }
+
+
 
     onValueChange(event) {
         this.setState({
@@ -42,25 +45,35 @@ class PostRequest extends React.Component {
 
     componentDidMount(event) {
         // Simple POST request with a JSON body using axios
-        if (event == "Apple"){
+        let arr = [];
+        Object.entries(this.state.companyList)
+        .map( ([key, value]) => { if (key == event){
+            arr = value
+        }})
+        console.log(arr);
+
+        if (arr[0] == 'Sales Revenue Net'){
             axios.post(
-                this.state.companyList.Apple[1],
-                this.state.companyList.Apple[2], // This is the body part
-              ).then(response => this.setState({ predictedValue: response.data, userSelection: this.state.companyList.Apple[0] }));
-              console.log(this.state.data)
-              this.forceUpdate();
+                arr[1],
+                arr[2], // This is the body part
+                ).then(response => this.setState({ predictedValue: response.data, userSelection: arr[0] }));
+                console.log(this.state.data)
+                this.forceUpdate(); 
         } else {
-            axios.post(
-                this.state.companyList.Alphabet[1],
-                this.state.companyList.Alphabet[2], // This is the body part
-              ).then(response => this.setState({ predictedValue: response.data, userSelection: this.state.companyList.Alphabet[0] }));
-              console.log(this.state.data)
-              this.forceUpdate();
+            if (arr.length > 3){
+                axios.post(
+                    arr[4],
+                    arr[5], // This is the body part
+                    ).then(response => this.setState({ predictedValue: response.data, userSelection: arr[3] }));
+                    console.log(this.state.data)
+                    this.forceUpdate(); 
+            }
         }
     }
 
     render() {
         const { predictedValue } = this.state;
+        const { userSelection } = this.state;
         return (
             <div>
                 <div className="card text-center m-3">
@@ -96,13 +109,17 @@ class PostRequest extends React.Component {
                         </div>
                         <div><br /></div>
                         <button className="btn btn-default" type="submit">
-                        Submit
+                        Submit ML Search
                         </button>
                     </form>
                     <div><br /></div>
 
                     Predicted {this.state.userSelection} for 2022: ${(parseInt(predictedValue,  10)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
+                {/* <div>
+             <h1> {userSelection}</h1>
+             <CompanyList parentCallback = {this.handleCallback}/>    
+           </div> */}
             </div>
             
         );

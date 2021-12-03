@@ -1,12 +1,13 @@
 import './App.css';
 import React, { useEffect, useState } from "react";
-import Search from './components/search/Search.js';
+// import Search from './components/search/Search.js';
 import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
 import Dropdown from './components/dropdown/Dropdown';
 import { dropdownData } from './utils/dropdown_data';
 import OutputTable from './components/Table/table.js';
 import { PostRequest } from './components/ml_endpoint/PostRequest';
+import { CompanyList } from './components/radio_buttons/CompanyList';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   const [companyData, setCompanyData] = useState([])
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
 
   // Fetch from python server
   useEffect(() => {
@@ -31,7 +32,6 @@ function App() {
         <div><br /></div>
         <div><br /></div>
         <p> Welcome to Amazon Contextual Search app! </p>
-        {/* <Search /> */}
         <span>&nbsp;</span>
         <img className="logo" src={logo} alt="Logo" />
       </header>
@@ -44,13 +44,20 @@ function App() {
           ))}
         </div>
         <PostRequest />
+        {/* <CompanyList /> */}
 
         <div>
         <button onClick={() => setVisible(!visible)}>
-        {visible ? 'Submit' : 'Submit'}
+        {visible ? 'Submit GET Search' : 'Submit GET Search'}
         </button>
         {visible && <OutputTable /> }
         </div>
+        
+        {/* <div className="accordion">
+          {dropdownData.map(({ title, content }) => (
+            <Dropdown title={title} content={content} />
+          ))}
+        </div> */}
       </div>
     </div>
   );

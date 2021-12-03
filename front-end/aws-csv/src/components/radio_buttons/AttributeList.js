@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import '../dropdown/styles.css';
 import companies from '../../utils/companyName_to_cik.json'
 import attrb from '../../utils/list.json'
@@ -25,7 +25,6 @@ class AttributeList extends Component {
 
   formSubmit(event) {
     event.preventDefault();
-    console.log(this.state.selectedOption)
     this.componentDidMount(this.state.selectedOption)
   }
 
@@ -35,7 +34,7 @@ class AttributeList extends Component {
   }
 
   componentDidMount(event){
-
+    console.log(event);
   }
 
   render() {
