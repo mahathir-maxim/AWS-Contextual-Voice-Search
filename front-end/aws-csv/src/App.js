@@ -26,8 +26,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p> Welcome to Amazon Contextual Voice Search app! </p>
-        <Search />
+        <div><br /></div>
+        <div><br /></div>
+        <p> Welcome to Amazon Contextual Search app! </p>
+        {/* <Search /> */}
         <span>&nbsp;</span>
         <img className="logo" src={logo} alt="Logo" />
       </header>
