@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import '../dropdown/styles.css';
 import companies from '../../utils/companyName_to_cik.json'
 import attrb from '../../utils/list.json'
+import { PostRequest } from '../ml_endpoint/PostRequest';
 
-class CompanyList extends React.Component{
+class CompanyList extends Component {
 
   constructor(props) {
     super(props);
-
 
     this.state = {
       companyNames: null,
@@ -26,7 +26,6 @@ class CompanyList extends React.Component{
 
   formSubmit(event) {
     event.preventDefault();
-    console.log(this.state.selectedOption)
     this.componentDidMount(this.state.selectedOption)
   }
 
@@ -36,7 +35,7 @@ class CompanyList extends React.Component{
   }
 
   componentDidMount(event){
-
+    console.log(event);
   }
 
   render() {
@@ -67,6 +66,7 @@ class CompanyList extends React.Component{
             Submit
           </button>
         </form>
+
       </div>
     );
   }

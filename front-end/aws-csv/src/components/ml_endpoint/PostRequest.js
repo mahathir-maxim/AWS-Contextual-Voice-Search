@@ -10,11 +10,13 @@ class PostRequest extends React.Component {
 
         this.state = {
             predictedValue: null,
-            userCompany: null,
-            userAttribute: null,
+            userSelection: null,
             companyList: {
-                Alphabet: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://srelobtwa0.execute-api.us-east-1.amazonaws.com/test2Alphabet/alphabetrevresource', '{"data":"20210206"}'],
-                Apple: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://qsrbxkm9sb.execute-api.us-east-1.amazonaws.com/testApple/applerevresource', '{"data":"20120206"}']
+                Alphabet: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://srelobtwa0.execute-api.us-east-1.amazonaws.com/test2Alphabet/alphabetrevresource', '{"data":"20210206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://1ftar1tina.execute-api.us-east-1.amazonaws.com/testAlphabetNet/alphabetnetapiresource', '{"data":"20221021"}'],
+                Apple: ['Sales Revenue Net', 'https://obscure-thicket-61096.herokuapp.com/https://qsrbxkm9sb.execute-api.us-east-1.amazonaws.com/testApple/applerevresource', '{"data":"20120206"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://qeoy3025h0.execute-api.us-east-1.amazonaws.com/TestAppleNet/applenetapiresource', '{"data":"20221021"}'],
+                Amazon: ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://542ebht62f.execute-api.us-east-1.amazonaws.com/TestAmazonNet/amazonnetapiresource', '{"data":"20221021"}'],
+                ATnT: ['Revenue', 'https://obscure-thicket-61096.herokuapp.com/https://2du8kgrp7h.execute-api.us-east-1.amazonaws.com/TestAtnTRev/atntrevresource', '{"data":"20221021"}', 'NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ml7sy252q8.execute-api.us-east-1.amazonaws.com/testATnTNet/atntnetapiresource', '{"data":"20221021"}'],
+                AMD: ['NetIncomeLoss', 'https://obscure-thicket-61096.herokuapp.com/https://ke5s0fv5v9.execute-api.us-east-1.amazonaws.com/testAMDNet/amdnetresource', '{"data":"20221021"}']
             },
         };
         this.onValueChange = this.onValueChange.bind(this);
@@ -25,18 +27,18 @@ class PostRequest extends React.Component {
         this.setState({
           selectedOption: event.target.value
         });
-      }
+    }
+
+    forceUpdateHandler(){
+        this.forceUpdate();
+    };
     
     formSubmit(event) {
         event.preventDefault();
         console.log(this.state.selectedOption)
         this.componentDidMount(this.state.selectedOption)
+        this.forceUpdateHandler();
     }
-
-    callbackFunction = (companyChoice) => {
-        this.setState({userCompany: companyChoice})
-    }
-  
 
     componentDidMount(event) {
         // Simple POST request with a JSON body using axios
@@ -62,7 +64,6 @@ class PostRequest extends React.Component {
         return (
             <div>
                 <div className="card text-center m-3">
-                    <h5 className="card-header">Choose desired company's predicted value</h5>
 
                     <div><br /></div>
                     <form onSubmit={this.formSubmit}>
@@ -100,15 +101,10 @@ class PostRequest extends React.Component {
                     </form>
                     <div><br /></div>
 
-                    Predicted {this.state.userCompany} for 2022: ${(parseInt(predictedValue,  10)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    Predicted {this.state.userSelection} for 2022: ${(parseInt(predictedValue,  10)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </div>
-
-                {/* <div>
-                    <CompanyList parentCallback = {this.callbackFunction}/>
-                    <p> {this.state.userCompany} </p>
-                </div> */}
             </div>
-
+            
         );
     }
 }
