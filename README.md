@@ -26,7 +26,7 @@ To run back-end:
 
 cd to API folder
 
-run . venv/bin/activate
+run . venv/bin/activate, or if windows: venv\Scripts\activate
 
 run python3 app.py
 
