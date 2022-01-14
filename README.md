@@ -10,6 +10,8 @@ Bao
 Raj
 Shivam
 
+* The demo branch is the most updated branch *
+
 -----------------------------------------------------------------------
 
 To run front-end:
