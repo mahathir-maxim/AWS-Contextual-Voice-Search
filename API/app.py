@@ -1,3 +1,8 @@
+# companyName_to_cik.json and list.txt in API\static is auto-generated, and
+# upon data update those files will also be updated. When they are updated with new company
+# information, updated files must be manually moved to the proper destination front-end\aws-csv\src\assets
+# Also, convert list.txt to list.json. 
+
 from flask import Flask, jsonify, request
 
 import json
