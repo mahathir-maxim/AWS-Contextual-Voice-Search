@@ -115,11 +115,8 @@ class PostRequest extends React.Component {
                     <div><br /></div>
 
                     Predicted {this.state.userSelection} for 2022: ${(parseInt(predictedValue,  10)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    <div><br /></div>
                 </div>
-                {/* <div>
-             <h1> {userSelection}</h1>
-             <CompanyList parentCallback = {this.handleCallback}/>    
-           </div> */}
             </div>
             
         );

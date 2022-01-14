@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../dropdown/styles.css';
 import companies from '../../utils/companyName_to_cik.json'
-import attrb from '../../utils/list.json'
+import { GetSearch } from "../get_search/GetSearch";
 
 class CompanyList extends Component {
 
@@ -10,8 +10,8 @@ class CompanyList extends Component {
 
     this.state = {
       companyNames: null,
-      attributes: null,
-      selection: "Value"
+      companyToCik: null,
+      companySelection: "Value"
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -27,21 +27,13 @@ class CompanyList extends Component {
   formSubmit(event) {
     event.preventDefault();
     this.componentDidMount(this.state.selectedOption)
-    this.TextFile();
-  }
-
-  TextFile = () => {
-    var fs = require('fs');
-    fs.writeFile('/test.txt', 'Cool, I can do this in the browser!', function(err) {
-      fs.readFile('/test.txt', function(err, contents) {
-        console.log(contents.toString());
-      });
-    });
+    this.state.companySelection = this.state.selectedOption;
   }
 
   componentWillMount(event){
     this.state.companyNames = Object.keys(companies); 
-    this.state.attributes = Object.values(attrb);
+    this.state.companyToCik = new Map(Object.entries(companies)); 
+    this.state.example = this.state.companyToCik.get(this.state.selectedOption);
   }
 
   componentDidMount(event){
@@ -71,11 +63,12 @@ class CompanyList extends Component {
           ))}
 
           <div>
-            Selected option is : {this.state.selectedOption}
+            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} <div><br /></div> </strong>
           </div>
           <button className="btn btn-default" type="submit">
             Submit
           </button>
+          {this.state.example}
         </form>
         
       </div>

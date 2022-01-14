@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
 import '../dropdown/styles.css';
-import companies from '../../utils/companyName_to_cik.json'
 import attrb from '../../utils/list.json'
 
 class AttributeList extends Component {
@@ -9,7 +8,6 @@ class AttributeList extends Component {
     super(props);
 
     this.state = {
-      companyNames: null,
       attributes: null
     };
 
@@ -29,7 +27,6 @@ class AttributeList extends Component {
   }
 
   componentWillMount(){
-    this.state.companyNames = Object.keys(companies); 
     this.state.attributes = Object.values(attrb);
   }
 
@@ -60,8 +57,9 @@ class AttributeList extends Component {
           ))}
 
           <div>
-            Selected option is : {this.state.selectedOption}
+            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} </strong>
           </div>
+          <div><br /></div>
           <button className="btn btn-default" type="submit">
             Submit
           </button>

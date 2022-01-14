@@ -59,7 +59,7 @@ class YearList extends Component {
           ))}
 
           <div>
-            Selected option is : {this.state.selectedOption}
+            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} <div><br /></div> </strong>
           </div>
           <button className="btn btn-default" type="submit">
             Submit

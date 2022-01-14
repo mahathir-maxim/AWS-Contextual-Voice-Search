@@ -1,13 +1,10 @@
 import './App.css';
 import React, { useEffect, useState } from "react";
-// import Search from './components/search/Search.js';
-import { CompanyData } from './components/company_data/CompanyData';
 import logo from './assets/aws_logo.png';
 import Dropdown from './components/dropdown/Dropdown';
 import { dropdownData } from './utils/dropdown_data';
-import OutputTable from './components/Table/table.js';
+import { GetSearch } from './components/get_search/GetSearch';
 import { PostRequest } from './components/ml_endpoint/PostRequest';
-import { CompanyList } from './components/radio_buttons/CompanyList';
 
 function App() {
 
@@ -37,27 +34,16 @@ function App() {
       </header>
       <div className="App-content">
         <span>&nbsp;</span>
-        <CompanyData cikData={companyData} />
         <div className="accordion">
           {dropdownData.map(({ title, content }) => (
             <Dropdown title={title} content={content} />
           ))}
         </div>
-        <PostRequest />
-        {/* <CompanyList /> */}
 
-        <div>
-        <button onClick={() => setVisible(!visible)}>
-        {visible ? 'Submit GET Search' : 'Submit GET Search'}
-        </button>
-        {visible && <OutputTable /> }
-        </div>
-        
-        {/* <div className="accordion">
-          {dropdownData.map(({ title, content }) => (
-            <Dropdown title={title} content={content} />
-          ))}
-        </div> */}
+        <GetSearch />
+        <br></br>
+        <hr></hr>
+        <PostRequest />
       </div>
     </div>
   );
