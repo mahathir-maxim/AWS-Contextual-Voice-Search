@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import '../dropdown/styles.css';
 import companies from '../../utils/companyName_to_cik.json'
-import { GetSearch } from "../get_search/GetSearch";
 
 class CompanyList extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       companyNames: null,
       companyToCik: null,
-      companySelection: "Value"
+      companySelection: "No Value Selected!"
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -26,20 +25,18 @@ class CompanyList extends Component {
 
   formSubmit(event) {
     event.preventDefault();
-    this.componentDidMount(this.state.selectedOption)
     this.state.companySelection = this.state.selectedOption;
+    this.onValueChange(event);
+    sessionStorage.setItem('Company Name', this.state.companySelection);
+    sessionStorage.setItem('Company CIK', this.state.companyToCik.get(this.state.companySelection));
   }
 
   componentWillMount(event){
-    this.state.companyNames = Object.keys(companies); 
+    this.state.companyNames = Object.keys(companies);
+    this.state.companyNames.sort(); 
     this.state.companyToCik = new Map(Object.entries(companies)); 
     this.state.example = this.state.companyToCik.get(this.state.selectedOption);
   }
-
-  componentDidMount(event){
-    console.log(event);
-  }
-  
 
   render() {
     
@@ -63,14 +60,16 @@ class CompanyList extends Component {
           ))}
 
           <div>
-            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} <div><br /></div> </strong>
+            <strong> 
+              Selected option is : <div><br /></div> {sessionStorage.getItem('Company Name')} &nbsp;
+              with cik: &nbsp; {sessionStorage.getItem('Company CIK')}<div><br /></div> 
+            </strong>
           </div>
           <button className="btn btn-default" type="submit">
             Submit
           </button>
           {this.state.example}
         </form>
-        
       </div>
     );
   }

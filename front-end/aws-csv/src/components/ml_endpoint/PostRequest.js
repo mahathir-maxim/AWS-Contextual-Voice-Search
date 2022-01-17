@@ -108,9 +108,9 @@ class PostRequest extends React.Component {
                         Selected option is : {this.state.selectedOption}
                         </div>
                         <div><br /></div>
-                        <button className="btn btn-default" type="submit">
+                        <button className="btn btn-default" type="submit"> &nbsp;
                         Submit ML Search
-                        </button>
+                        &nbsp; </button>
                     </form>
                     <div><br /></div>
 

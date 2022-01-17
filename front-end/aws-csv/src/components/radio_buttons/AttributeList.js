@@ -8,7 +8,8 @@ class AttributeList extends Component {
     super(props);
 
     this.state = {
-      attributes: null
+      attributes: null,
+      selection: null
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -23,15 +24,13 @@ class AttributeList extends Component {
 
   formSubmit(event) {
     event.preventDefault();
-    this.componentDidMount(this.state.selectedOption)
+    this.state.selection = this.state.selectedOption;
+    sessionStorage.setItem('Selected Attribute', this.state.selection);
+    this.onValueChange(event);
   }
 
   componentWillMount(){
     this.state.attributes = Object.values(attrb);
-  }
-
-  componentDidMount(event){
-    console.log(event);
   }
 
   render() {
@@ -57,7 +56,7 @@ class AttributeList extends Component {
           ))}
 
           <div>
-            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} </strong>
+            <strong> Selected option is : <div><br /></div> {sessionStorage.getItem('Selected Attribute')} </strong>
           </div>
           <div><br /></div>
           <button className="btn btn-default" type="submit">

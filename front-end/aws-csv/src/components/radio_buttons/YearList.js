@@ -24,17 +24,13 @@ class YearList extends Component {
 
   formSubmit(event) {
     event.preventDefault();
-    this.componentDidMount(this.state.selectedOption)
+    this.state.selection = this.state.selectedOption;
+    sessionStorage.setItem('Selected Year', this.state.selection);
+    this.onValueChange(event);
   }
 
   componentWillMount(){
     this.state.yearList = Object.values(years);
-  }
-
-  componentDidMount(event){
-    this.state.selection = event
-    console.log(this.state.selection);
-      
   }
 
   render() {
@@ -59,7 +55,7 @@ class YearList extends Component {
           ))}
 
           <div>
-            <strong> Selected option is : <div><br /></div> {this.state.selectedOption} <div><br /></div> </strong>
+            <strong> Selected option is : <div><br /></div> {sessionStorage.getItem('Selected Year')} <div><br /></div> </strong>
           </div>
           <button className="btn btn-default" type="submit">
             Submit
