@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import '../dropdown/styles.css';
 import attrb from '../../utils/list.json'
 
+// Spawn list of attributes and get user's selection
+
 class AttributeList extends Component {
 
   constructor(props) {

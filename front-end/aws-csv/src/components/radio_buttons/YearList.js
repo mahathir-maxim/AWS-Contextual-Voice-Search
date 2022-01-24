@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import '../dropdown/styles.css';
 import years from '../../utils/years.json'
 
+// Spawn list of years and get user's selection
+
 class YearList extends Component {
 
   constructor(props) {

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import '../dropdown/styles.css';
-import companies from '../../utils/companyName_to_cik.json'
+import companies from '../../utils/companyName_to_cik.json';
+
+// Spawn list of companies and get user's selection
 
 class CompanyList extends Component {
 
@@ -10,7 +12,7 @@ class CompanyList extends Component {
     this.state = {
       companyNames: null,
       companyToCik: null,
-      companySelection: "No Value Selected!"
+      companySelection: "No Value Selected!",
     };
 
     this.onValueChange = this.onValueChange.bind(this);
@@ -35,7 +37,6 @@ class CompanyList extends Component {
     this.state.companyNames = Object.keys(companies);
     this.state.companyNames.sort(); 
     this.state.companyToCik = new Map(Object.entries(companies)); 
-    this.state.example = this.state.companyToCik.get(this.state.selectedOption);
   }
 
   render() {

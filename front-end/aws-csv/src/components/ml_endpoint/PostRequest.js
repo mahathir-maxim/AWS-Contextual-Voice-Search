@@ -4,6 +4,11 @@ import { AttributeList } from '../radio_buttons/AttributeList';
 import { CompanyList } from '../radio_buttons/CompanyList';
 import { YearList } from '../radio_buttons/YearList';
 
+/*
+    The following class takes in user's requested company and requested attribute for prediction,
+    and fetches data from AWS Sagemaker via the endpoints in companyList dictionary
+*/
+
 class PostRequest extends React.Component {
     constructor(props) {
         super(props);
@@ -23,8 +28,6 @@ class PostRequest extends React.Component {
         this.formSubmit = this.formSubmit.bind(this);
 
     }
-
-
 
     onValueChange(event) {
         this.setState({

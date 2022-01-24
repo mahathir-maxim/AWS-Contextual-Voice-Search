@@ -14,15 +14,26 @@ class GetSearch extends React.Component{
     }
 
     handleValidation() {
-        if (this.state.companyName == null || this.state.companyName == 'undefined'){
+        if (this.state.companyName == null || this.state.companyName == 'undefined' ||
+            sessionStorage.getItem("Company Name") == null || 
+            sessionStorage.getItem("Company Name") == 'undefined' ||
+            sessionStorage.getItem("Company CIK") == null || 
+            sessionStorage.getItem("Company CIK") == 'undefined')
+        {
             alert("Choose a valid Company!");
             return false
         }
-        if (this.state.attribute == null || this.state.attribute == 'undefined'){
+        if (this.state.attribute == null || this.state.attribute == 'undefined' ||
+        sessionStorage.getItem("Selected Attribute") == null || 
+        sessionStorage.getItem("Selected Attribute") == 'undefined')
+        {
             alert("Choose a valid Attribute!");
             return false
         }
-        if (this.state.year == null || this.state.year == 'undefined'){
+        if (this.state.year == null || this.state.year == 'undefined' ||
+        sessionStorage.getItem("Selected Year") == null || 
+        sessionStorage.getItem("Selected Year") == 'undefined')
+        {
             alert("Choose a valid Year!");
             return false
         }
